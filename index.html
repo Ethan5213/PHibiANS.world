@@ -3,36 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <style>
-
         a {
-            color: inherit;         /* 繼承父元素顏色 */
-            text-decoration: none;  /* 去除底線 */
+            color: inherit;
+            text-decoration: none;
         }
-
         a:visited {
-            color: inherit;         /* 拜訪過也不變色 */
+            color: inherit;
         }
-
         body {
             margin: 0;
             padding: 0;
+            --bg-image: url("https://picsum.photos/id/1015/1200/800"); /* ✅ 加上背景變數 */
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: var(--bg-image); /* ✅ 使用變數控制背景圖 */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            z-index: -1;
+            transition: background-image 0.5s ease;
         }
 
         .parallax {
-            background-image: url('https://picsum.photos/1200/800'); /* 換成你的背景圖 */
+            background-image: url('https://picsum.photos/id/1015/1200/800');
             height: 800px;
             width: 100%;
-            background-attachment: fixed; /* 重點！ */
+            background-attachment: fixed;
             background-size: cover;
             background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
+            transition: background-image 0.5s ease;
         }
 
-        /*按鈕*/
+        /* 按鈕 */
         .circle-button {
             width: 80px;
             height: 80px;
@@ -45,10 +58,8 @@
             color: #333;
             transition: background 0.3s, transform 0.3s;
             text-decoration: none;
-
         }
 
-        /*按鈕懸浮*/
         .circle-button:hover {
             background-color: #aaa;
             transform: scale(1.1);
@@ -57,45 +68,86 @@
         .circle-button-box {
             width: 100%;
             max-width: 200px;
-            margin: 80px auto; /* 距離上方的圖片 & 水平置中 */
+            margin: 80px auto;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
         }
 
+        .trigger-section {
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f0f0;
+        }
 
+        /* ✅ 修改這裡：mask 區塊背景變成完全透明 */
+        .mask {
+            height: 200px;
+            background-color: transparent;
+            z-index: 1;
+        }
 
+        /* ✅ 修改這裡：中間內容區變成白色不透明 */
+        .main-content {
+            background: white;
+            z-index: 2;
+            position: relative;
+            padding: 50px 0;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-<!-- 之後改LOGO -->
-<section class="parallax">
+
+<!-- 上方透明遮罩 -->
+<section class="mask top-mask">
     <h1>PHibiANS</h1>
 </section>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-<!--  按鈕組  -->
-<div class="circle-button-box">
-    <!-- Fb  -->
+<!-- 中間白底內容 -->
+<section class="main-content">
+    <div class="circle-button-box">
+        <!-- Fb -->
         <a href="https://www.facebook.com/hen.duo.ren.2025/" target="_blank">
-        <div class="circle-button">
-            <i class="fab fa-facebook-f"></i>
-        </div>
+            <div class="circle-button">
+                <i class="fab fa-facebook-f"></i>
+            </div>
         </a>
-        <!-- Ig  -->
+        <!-- Ig -->
         <div class="circle-button">
             <a href="https://www.instagram.com/phibians5213/?hl=zh-tw" target="_blank">
                 <i class="fab fa-instagram"></i></a>
         </div>
         <a href="#" class="circle-button">
-            <i class="fas fa-camera"></i> <!-- 你可以換成你的圖標 -->
+            <i class="fas fa-question"></i>
         </a>
         <a href="#" class="circle-button">
-            <i class="fas fa-question"></i> <!-- 你可以換成你的圖標 -->
+            <i class="fas fa-question"></i>
         </a>
-</div>
+    </div>
+</section>
 
+<!-- 下方透明遮罩 -->
+<section class="mask bottom-mask" id="footer-trigger">
+    <h1>PHibiANS</h1>
+</section>
+
+<script>
+    const trigger = document.getElementById("footer-trigger");
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            document.body.style.setProperty('--bg-image', entry.isIntersecting
+                ? "url('https://picsum.photos/id/1016/1200/800')"  // ✅ 圖片B
+                : "url('https://picsum.photos/id/1015/1200/800')"); // ✅ 圖片A
+        });
+    }, { threshold: 0.5 });
+
+    observer.observe(trigger);
+</script>
 
 </body>
 </html>
