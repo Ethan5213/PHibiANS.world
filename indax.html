@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        a {
+            color: inherit;         /* 繼承父元素顏色 */
+            text-decoration: none;  /* 去除底線 */
+        }
+
+        a:visited {
+            color: inherit;         /* 拜訪過也不變色 */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .parallax {
+            background-image: url('https://picsum.photos/1200/800'); /* 換成你的背景圖 */
+            height: 800px;
+            width: 100%;
+            background-attachment: fixed; /* 重點！ */
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        /*按鈕*/
+        .circle-button {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            color: #333;
+            transition: background 0.3s, transform 0.3s;
+            text-decoration: none;
+
+        }
+
+        /*按鈕懸浮*/
+        .circle-button:hover {
+            background-color: #aaa;
+            transform: scale(1.1);
+        }
+
+        .circle-button-box {
+            width: 100%;
+            max-width: 200px;
+            margin: 80px auto; /* 距離上方的圖片 & 水平置中 */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+<!-- 之後改LOGO -->
+<section class="parallax">
+    <h1>PHibiANS</h1>
+</section>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!--  按鈕組  -->
+<div class="circle-button-box">
+    <!-- Fb  -->
+        <a href="https://www.facebook.com/hen.duo.ren.2025/" target="_blank">
+        <div class="circle-button">
+            <i class="fab fa-facebook-f"></i>
+        </div>
+        </a>
+        <!-- Ig  -->
+        <div class="circle-button">
+            <a href="https://www.instagram.com/phibians5213/?hl=zh-tw" target="_blank">
+                <i class="fab fa-instagram"></i></a>
+        </div>
+        <a href="#" class="circle-button">
+            <i class="fas fa-camera"></i> <!-- 你可以換成你的圖標 -->
+        </a>
+        <a href="#" class="circle-button">
+            <i class="fas fa-question"></i> <!-- 你可以換成你的圖標 -->
+        </a>
+</div>
+
+
+</body>
+</html>
