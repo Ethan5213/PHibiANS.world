@@ -85,9 +85,11 @@
 
         /* ✅ 修改這裡：mask 區塊背景變成完全透明 */
         .mask {
+            position: relative; /* ✅ 確保 .text 的絕對定位以 .mask 為基準 */
             height: 200px;
             background-color: transparent;
             z-index: 1;
+            overflow: hidden; /* 可選，防止溢出 */
         }
 
         /* ✅ 修改這裡：中間內容區變成白色不透明 */
@@ -98,13 +100,20 @@
             padding: 50px 0;
             text-align: center;
         }
+        .text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* 置中 */
+            margin: 0;
+        }
     </style>
 </head>
 <body>
 
 <!-- 上方透明遮罩 -->
 <section class="mask top-mask">
-    <h1>PHibiANS</h1>
+    <h1 class="text" >PHibiANS</h1>
 </section>
 
 <!-- 中間白底內容 -->
@@ -132,7 +141,7 @@
 
 <!-- 下方透明遮罩 -->
 <section class="mask bottom-mask" id="footer-trigger">
-    <h1>PHibiANS</h1>
+    <h1 class="text">PHibiANS</h1>
 </section>
 
 <script>
