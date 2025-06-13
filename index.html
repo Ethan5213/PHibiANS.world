@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!--按鈕圖標-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
     <style>
         a {
             color: inherit;
@@ -15,7 +17,7 @@
         body {
             margin: 0;
             padding: 0;
-            --bg-image: url("https://picsum.photos/id/1015/1200/800"); /* ✅ 加上背景變數 */
+            --bg-image: url("圖片/臨時最上方底圖_工作區域 1.png"); /* ✅ 加上背景變數 */
         }
         body::before {
             content: "";
@@ -27,12 +29,12 @@
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
-            z-index: -1;
+            z-index: -100;
             transition: background-image 0.5s ease;
         }
 
         .parallax {
-            background-image: url('https://picsum.photos/id/1015/1200/800');
+            background-image: url('圖片/臨時最上方底圖_工作區域 1.png');
             height: 800px;
             width: 100%;
             background-attachment: fixed;
@@ -64,7 +66,7 @@
             background-color: #aaa;
             transform: scale(1.1);
         }
-
+           /*  按鈕box   */
         .circle-button-box {
             width: 100%;
             max-width: 200px;
@@ -86,18 +88,19 @@
         /* ✅ 修改這裡：mask 區塊背景變成完全透明 */
         .mask {
             position: relative; /* ✅ 確保 .text 的絕對定位以 .mask 為基準 */
-            height: 200px;
+            height: 500px;
             background-color: transparent;
             z-index: 1;
             overflow: hidden; /* 可選，防止溢出 */
         }
 
-        /* ✅ 修改這裡：中間內容區變成白色不透明 */
+        /* 中間內容區 */
         .main-content {
             background: white;
-            z-index: 2;
+            z-index: 100;
             position: relative;
             padding: 50px 0;
+            height: 1000px;
             text-align: center;
         }
         .text {
@@ -106,19 +109,55 @@
             left: 50%;
             transform: translate(-50%, -50%); /* 置中 */
             margin: 0;
-
+            color: #ffffff;
         }
-    </style>
+        /*幻燈片控制*/
+        .swiper {
+            width: 600px;
+            height: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .swiper-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .down-box{
+            position:relative;
+            width: auto;
+            height: 500px;
+            color: black;
+        }
+        .down-text{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            display: flex;
+        }
+        </style>
+
 </head>
 <body>
+<!--滾動式幻燈片-->
+<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
+<script src="swiper.js"></script>
 <!-- 上方透明遮罩 -->
+<div class="">
+
+
 <section class="mask top-mask">
     <h1 class="text" >PHibiANS</h1>
 </section>
 
 <!-- 中間白底內容 -->
 <section class="main-content">
+    <!--按鈕用BOX-->
     <div class="circle-button-box">
         <!-- Fb -->
         <a href="https://www.facebook.com/hen.duo.ren.2025/" target="_blank">
@@ -138,6 +177,28 @@
             <i class="fas fa-question"></i>
         </a>
     </div>
+
+    <!--幻燈片-->
+    <!-- 主容器 -->
+    <div class="swiper">
+        <!-- 包裹所有 slide 的容器 -->
+        <div class="swiper-wrapper">
+            <!-- 幻燈片項目 -->
+            <div class="swiper-slide"><img src="https://picsum.photos/id/1015/600/300" /></div>
+            <div class="swiper-slide"><img src="https://picsum.photos/id/1016/600/300" /></div>
+            <div class="swiper-slide"><img src="https://picsum.photos/id/1017/600/300" /></div>
+        </div>
+
+        <!-- 分頁點（可選） -->
+        <div class="swiper-pagination"></div>
+
+        <!-- 左右箭頭（可選） -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+    </div>
+
+
+
 </section>
 
 <!-- 下方透明遮罩 -->
@@ -145,14 +206,20 @@
     <h1 class="text">PHibiANS</h1>
 </section>
 
+    <div class="down-box">
+        <h1 class="down-text">123123</h1>
+        <h2 class="down-text">456456</h2>
+    </div>
+
+
 <script>
     const trigger = document.getElementById("footer-trigger");
 
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             document.body.style.setProperty('--bg-image', entry.isIntersecting
-                ? "url('https://picsum.photos/id/1016/1200/800')"  // ✅ 圖片B
-                : "url('https://picsum.photos/id/1015/1200/800')"); // ✅ 圖片A
+                ? "url('圖片/臨時最下方底圖_工作區域 1.png')"  // ✅ 圖片B
+                : "url('圖片/臨時最上方底圖_工作區域 1.png')"); // ✅ 圖片A
         });
     }, { threshold: 0.5 });
 
